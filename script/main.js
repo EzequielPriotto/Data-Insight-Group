@@ -24,6 +24,11 @@ const showMiembrosEstado = (data, estado) => {
 }
 const showMiembrosEstado2 = (data, estado) => { return console.table(tablaEstados = data.results[0]['members'].filter(member => member['state'] === estado).map(member => member = member['first_name'] + " " + member['last_name'] + " " + member['state'] ))
 }
+
+
+
+
+
 // ============== IMPRESION ==============
 
 const form = document.querySelector("form")
@@ -33,7 +38,7 @@ const tabla = document.querySelector('#cabecera')
 var tipodeOrden = "name"
 
 form.addEventListener("change", evento => handleForm(evento))
-tabla.addEventListener("click", event => ordenarLista(event.target.id))
+tabla.addEventListener("click", event => asignarOrden(event.target))
 
 
 const tableUpdate = (data, idTabla, condicion) => {
@@ -97,7 +102,7 @@ const optionUpdate = (data, idSelect, condicion) =>{
         }
     });
     auxiliar.sort()
-    console.log(auxiliar)
+    // console.log(auxiliar)
     auxiliar.forEach(state => {
         let filaNueva = document.createElement('option');
         filaNueva.setAttribute("value",state)
@@ -114,7 +119,7 @@ const optionUpdate = (data, idSelect, condicion) =>{
         }
     });
     auxiliar.sort()
-    console.log(auxiliar)
+    // console.log(auxiliar)
     
 }
 return auxiliar
@@ -144,7 +149,7 @@ const handleForm = () =>{
     if(valoresSeleccionados.length === 0){
         valoresSeleccionados.push("")
     }
-    console.log(valoresSeleccionados)
+    // console.log(valoresSeleccionados)
     let segundaLista = filtrar(primerLista, valoresSeleccionados, "partidos");
     
     tableUpdate(segundaLista, 'table-body', "filtrado")
@@ -191,44 +196,46 @@ const filtrar = (array, condicion, tipoFiltro) => {
             
             // console.log(auxiliarOrdenado);
             
-            
-            
-            
-            
-            
             return auxiliarOrdenado
         }
         
 }
 
 
-const ordenarLista = (tipoComparacion) => {
-    if(tipoComparacion === "name"){
+const asignarOrden = (tipoComparacion) => {
+    Array.from(document.getElementsByClassName("THactivado")).forEach(th => th.classList.remove("THactivado"))
+    if(tipoComparacion.id === "name"){
+        tipoComparacion.classList.add("THactivado")
         tipodeOrden = "name"
         handleForm()
     }
-    else if(tipoComparacion === "party"){
+    else if(tipoComparacion.id === "party"){
+        tipoComparacion.classList.add("THactivado")
         tipodeOrden = "party"
         handleForm()
     }
-    else if(tipoComparacion === "states"){
+    else if(tipoComparacion.id === "states"){
+        tipoComparacion.classList.add("THactivado")
         tipodeOrden = "states"
         handleForm()
     }
-    else if(tipoComparacion === "senority"){
-        tipodeOrden = "senority"
+    else if(tipoComparacion.id === "seniority"){
+        tipoComparacion.classList.add("THactivado")
+        tipodeOrden = "seniority"
         handleForm()
     }
-    else if(tipoComparacion === "votes"){
+    else if(tipoComparacion.id === "votes"){
+        tipoComparacion.classList.add("THactivado")
         tipodeOrden = "votes"
         handleForm()
     }
-
+    
 }
 
 
 function SortArray(x, y){
     if(tipodeOrden === "name"){
+       console.log()
         return collator.compare(x.last_name, y.last_name);
 
     }   
@@ -240,8 +247,9 @@ function SortArray(x, y){
         return collator.compare(x.state, y.state);
 
     }   
-    else if(tipodeOrden === "senority"){
-        return collator.compare(x.seniority, y.seniority);
+    else if(tipodeOrden === "seniority"){
+
+        return collator.compare(y.seniority, x.seniority);
 
     }   
     else if(tipodeOrden === "votes"){

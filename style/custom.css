@@ -74,9 +74,17 @@ header{
 
 
 
-
 th{
     text-align: center;
+ 
+}
+thead th:hover{
+    background-color: #ececec;
+    cursor:pointer
+}
+
+.THactivado{
+    background-color: #ececec !important;
 }
 
 .fila1{
