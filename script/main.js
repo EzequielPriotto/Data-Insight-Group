@@ -26,37 +26,44 @@ const showMiembrosEstado2 = (data, estado) => { return console.table(tablaEstado
 }
 // ============== IMPRESION ==============
 
+const form = document.querySelector("form")
+const collator = new Intl.Collator('en');
+const selectCuerpo = document.querySelector(`#states`);
+const tabla = document.querySelector('#cabecera')
+var tipodeOrden = "name"
 
+form.addEventListener("change", evento => handleForm(evento))
+tabla.addEventListener("click", event => ordenarLista(event.target.id))
 
 
 const tableUpdate = (data, idTabla, condicion) => {
-        
-        
-        let tablaCuerpo = document.querySelector(`#${idTabla}`);
-        tablaCuerpo.innerHTML = ''
-      if(condicion === ""){
+    
+    
+    let tablaCuerpo = document.querySelector(`#${idTabla}`);
+    tablaCuerpo.innerHTML = ''
+    if(condicion === ""){
         data['results'][0]['members'].forEach((member) =>{
             let filaNueva = document.createElement('tr');
-         
+            
             filaNueva.innerHTML = `
-           
-                <th scope="row" class="fila1"><a href="${member.url}" target="_blank" rel="noopener noreferrer">${member.first_name} ${
+            
+            <th scope="row" class="fila1"><a href="${member.url}" target="_blank" rel="noopener noreferrer">${member.first_name} ${
                     member.middle_name ? member.middle_name : ""
                 } ${member.last_name} </a></th>
                 <th>${member.party}</th>
                 <th>${member.state}</th>
                 <th>${member.seniority} years</th>
                 <th>${member.votes_with_party_pct}%</th>
-            
-            `;
-    
-            tablaCuerpo.appendChild(filaNueva)
-        })
-      }
-      else if(condicion === "filtrado"){
+                
+                `;
+                
+                tablaCuerpo.appendChild(filaNueva)
+            })
+        }
+        else if(condicion === "filtrado"){
         data.forEach((member) =>{
             let filaNueva = document.createElement('tr');
-         
+            
             filaNueva.innerHTML = `
            
             <th scope="row" class="fila1"><a href="${member.url}" target="_blank rel="noopener noreferrer" ">${member.first_name} ${
@@ -66,27 +73,26 @@ const tableUpdate = (data, idTabla, condicion) => {
             <th>${member.state}</th>
             <th>${member.seniority} years</th>
             <th>${member.votes_with_party_pct}%</th>
-        
-        `;
-        
-    
+            
+            `;
+            
+            
             tablaCuerpo.appendChild(filaNueva)
         })
-      }
-     
+    }
+    
         
 }
 tableUpdate(data, 'table-body', "")
 
-let selectCuerpo = document.querySelector(`#states`);
 
 
 const optionUpdate = (data, idSelect, condicion) =>{
    let auxiliar = []
    if(condicion === "inicio"){
-    data.results[0].members.forEach( member => {
-        if(!auxiliar.includes(member.state)){
-            auxiliar.push(member.state)
+       data.results[0].members.forEach( member => {
+           if(!auxiliar.includes(member.state)){
+               auxiliar.push(member.state)
             
         }
     });
@@ -99,7 +105,7 @@ const optionUpdate = (data, idSelect, condicion) =>{
         filaNueva.innerHTML = `${state}`
         selectCuerpo.appendChild(filaNueva)
     })
-   }
+}
    else if(condicion === "data"){
     data.results[0].members.forEach( member => {
         if(!auxiliar.includes(member.state)){
@@ -110,19 +116,15 @@ const optionUpdate = (data, idSelect, condicion) =>{
     auxiliar.sort()
     console.log(auxiliar)
     
-   }
-    return auxiliar
-    
+}
+return auxiliar
+
 }
 optionUpdate(data, 'states', "inicio") 
 
-
-
-const form = document.querySelector("form")
-
-form.addEventListener("change", evento => handleForm(evento))
-
 const handleForm = () =>{
+
+
     
     // FILTRO POR SELECT (ESTADOS)
     
@@ -144,10 +146,12 @@ const handleForm = () =>{
     }
     console.log(valoresSeleccionados)
     let segundaLista = filtrar(primerLista, valoresSeleccionados, "partidos");
-    // console.log(segundaLista)
+    
     tableUpdate(segundaLista, 'table-body', "filtrado")
 
+
 }
+
 
 const filtrar = (array, condicion, tipoFiltro) => {    
     if(tipoFiltro === "estados"){
@@ -158,17 +162,17 @@ const filtrar = (array, condicion, tipoFiltro) => {
                 auxiliar = array.results[0].members.filter((miembro) =>{
                     return miembro.state === condicion;
                   
-            })
-        }
-        else if(condicion === "all"){
-          auxiliar =  array.results[0].members.filter(miembro => miembro)
+                })
+            }
+            else if(condicion === "all"){
+                auxiliar =  array.results[0].members.filter(miembro => miembro)
+                
+            }
             
-        }
-
         });
         return auxiliar
     }
-
+    
     else if (tipoFiltro === "partidos"){
         let auxiliar = [];
         let listaDeCheck = condicion;
@@ -179,11 +183,69 @@ const filtrar = (array, condicion, tipoFiltro) => {
             array.map((miembro) =>
             miembro.party === opcion ? 
             auxiliar.push(miembro) : opcion === "" ?
-             auxiliar = listaFiltrada1 : "")))
+            auxiliar = listaFiltrada1 : "")))
             
-        let auxiliar2 =  new Set(auxiliar);
-        auxiliar = Array.from(auxiliar2)
-        return auxiliar
+            let auxiliar2 =  new Set(auxiliar);
+            auxiliar = Array.from(auxiliar2)
+            var auxiliarOrdenado = auxiliar.sort(SortArray);
+            
+            // console.log(auxiliarOrdenado);
+            
+            
+            
+            
+            
+            
+            return auxiliarOrdenado
+        }
+        
+}
+
+
+const ordenarLista = (tipoComparacion) => {
+    if(tipoComparacion === "name"){
+        tipodeOrden = "name"
+        handleForm()
+    }
+    else if(tipoComparacion === "party"){
+        tipodeOrden = "party"
+        handleForm()
+    }
+    else if(tipoComparacion === "states"){
+        tipodeOrden = "states"
+        handleForm()
+    }
+    else if(tipoComparacion === "senority"){
+        tipodeOrden = "senority"
+        handleForm()
+    }
+    else if(tipoComparacion === "votes"){
+        tipodeOrden = "votes"
+        handleForm()
     }
 
+}
+
+
+function SortArray(x, y){
+    if(tipodeOrden === "name"){
+        return collator.compare(x.last_name, y.last_name);
+
+    }   
+    else if(tipodeOrden === "party"){
+        return collator.compare(x.party, y.party);
+
+    }   
+    else if(tipodeOrden === "states"){
+        return collator.compare(x.state, y.state);
+
+    }   
+    else if(tipodeOrden === "senority"){
+        return collator.compare(x.seniority, y.seniority);
+
+    }   
+    else if(tipodeOrden === "votes"){
+        return collator.compare(y.votes_with_party_pct, x.votes_with_party_pct);
+
+    }   
 }
