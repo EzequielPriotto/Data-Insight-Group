@@ -1,0 +1,136 @@
+body{
+    /* background-color: rgb(128, 128, 128); */
+}
+
+header{
+    height: 5rem;
+}
+.img-thumbnail{
+    border: none !important;
+    background-color: rgba(0, 200, 255, 0);
+}
+
+.img-main{
+    background-image: url('../assets/img-main.png');
+    background-position:top;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.navToggle{
+    color: #318fc9 !important;
+    font-weight: bold;
+    font-style: italic;
+    height: 100%;
+}
+.select, .nav-Home{
+    font-weight: bold;
+    background-color: rgb(202, 202, 202) !important;
+    height: 100%;
+}
+.nav-Home{
+    background-color: rgba(202, 202, 202, 0) !important;
+
+}
+.active{
+    background-color: rgb(202, 202, 202) !important;
+    
+}
+.nav-Home span{
+    margin: 0;
+    align-self: center;
+}
+
+.navbar-nav{
+    border: 2px solid rgba(0, 0, 0, 0);
+    width: 100% !important;
+}
+
+.navbar .container-fluid {
+    padding: 0;
+}
+
+
+.accordion-button{
+    color: #0e78be;
+    font-weight: bold;
+    font-size: large;
+    font-style: italic;
+}
+.accordion-button p span{
+    border-bottom: 2px solid #00c8ff;
+}
+.accordion-button:not(.collapsed){
+    background-color: white;
+    box-shadow: 0 0 0 rgba(255, 0, 0, 0);
+}
+.accordion-button:focus{
+    border-color: rgba(240, 248, 255, 0);
+    box-shadow: 0 0 0 rgba(255, 0, 0, 0);
+    color: #0e78be;
+}
+
+
+
+
+
+
+th{
+    text-align: center;
+}
+
+.fila1{
+    text-align: start !important;
+}
+
+
+
+footer div{
+    display: flex;
+    gap: 1%;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1%;
+    border: 2px solid black;
+    padding: .5%;
+}
+
+footer div p{
+    margin-bottom: 0;
+    /* background-color: #00c8ff; */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 1% 0;
+    padding-left: 1%;
+}
+
+footer div p:first-child{
+    padding-left: 0;
+    padding-right: 2%;
+    border-right: 2px solid black;
+}
+
+
+
+@media (min-width: 1200px) {
+    .navToggle{
+         padding: 12% 0;
+    }
+    .nav-Home{
+        padding: 12% 0;
+
+    }
+    .navbar-nav{
+        border: 2px solid rgb(0, 0, 0);
+    }
+    .navbar .container-fluid {
+        padding: 12px;
+    }
+}
+
+
+
+
