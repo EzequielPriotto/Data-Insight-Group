@@ -5,10 +5,13 @@ body{
 header{
     height: 5rem;
 }
-.img-thumbnail{
+
+.img-nav{
     border: none !important;
     background-color: rgba(0, 200, 255, 0);
+    width: 50% !important;
 }
+
 
 .img-main{
     background-image: url('../assets/img-main.png');
@@ -50,6 +53,12 @@ header{
     padding: 0;
 }
 
+.checksTable{
+    display: none;
+}
+label{
+    width: 100%;
+}
 
 .accordion-button{
     color: #0e78be;
