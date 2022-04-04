@@ -53,9 +53,10 @@ header{
     padding: 0;
 }
 
-.checksTable{
+label input[type="checkbox"]{
     display: none;
 }
+
 label{
     width: 100%;
 }
