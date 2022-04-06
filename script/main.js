@@ -275,9 +275,9 @@ if (body.id === "bodyAttendance") {
 
 
     // ___________ ATTENDANCE ___________
-
+    
     let tipoTop = ""
-    let topData = dataBase
+    let topData = dataBase.filter(member => member.total_votes != 0)
     if(main.id === "mainAttendance"){
         console.log("hola")
         
@@ -293,7 +293,9 @@ if (body.id === "bodyAttendance") {
 
     }
 
-    // ___________ LOYALY ___________
+
+    // ___________ LOYALTY ___________
+
    else if(main.id === "mainLoyalty"){
      // ORDERNAR EL TOP LEAST
      console.log("chau")
@@ -324,10 +326,16 @@ if (body.id === "bodyAttendance") {
             <tr><td>Total</td> <td>${estadisticas.Number_Total}</td> <td>${porcentajeAll}%</td></tr>
              `
         }
-
+   
         else if (tbodyID == "tbody_Last_Engaged" || tbodyID == "tbody_Most_Engaged") {
+            
             porcentajeTotal = Math.round(porcentajeTotal)
-            for (i = 0; i < porcentajeTotal; i++) {
+            while (arrayMiembros[porcentajeTotal].missed_votes_pct == arrayMiembros[porcentajeTotal+1].missed_votes_pct) {
+                
+                porcentajeTotal ++
+            }
+            
+            for (i = 0; i <= porcentajeTotal; i++) {
                 let filaNueva = document.createElement('tr');
                 filaNueva.innerHTML = `
                              <th><a href="${arrayMiembros[i].url}">${arrayMiembros[i].first_name}
@@ -338,10 +346,17 @@ if (body.id === "bodyAttendance") {
                                      `
                 tbody.appendChild(filaNueva)
             }
+
         }
+
         else if (tbodyID == "tbody_Last_Loyalty" || tbodyID == "tbody_Most_Loyalty") {
             porcentajeTotal = Math.round(porcentajeTotal)
+            while (arrayMiembros[porcentajeTotal].votes_with_party_pct == arrayMiembros[porcentajeTotal+1].votes_with_party_pct) {
+                
+                porcentajeTotal ++
+            }
             for (i = 0; i < porcentajeTotal; i++) {
+                console.log(arrayMiembros[i].first_name + " " + arrayMiembros[i].votes_with_party_pct)
                 let filaNueva = document.createElement('tr');
                 let votosRecibidos =  (arrayMiembros[i].total_votes / 100) * arrayMiembros[i].votes_with_party_pct
                 filaNueva.innerHTML = `
