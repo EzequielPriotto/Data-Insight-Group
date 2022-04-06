@@ -132,6 +132,11 @@ footer div p:first-child{
 }
 
 
+#bodyAttendance table, th, td{
+    border: 1px solid black !important;
+}
+
+
 
 @media (min-width: 1200px) {
     .navToggle{

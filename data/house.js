@@ -12485,8 +12485,8 @@ let data = {
                   "state": "NY",
                   "district": "4",
                   "at_large": false,
-                  "geoid": "3604"
-                  ,"missed_votes_pct": 57.97,
+                  "geoid": "3604",
+                  "missed_votes_pct": 57.97,
                   "votes_with_party_pct": 93.84,
                   "votes_against_party_pct": 5.96
                 },
