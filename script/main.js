@@ -32,23 +32,12 @@ const showMiembrosEstado2 = (data, estado) => {
 
 
 // ============== IMPRESION ==============
-let body = document.querySelector('body')  // DEFINO MI BODY
-let main = document.querySelector('main') // DEFINO MI MAIN
+const body = document.querySelector('body')  // DEFINO MI BODY
+const main = document.querySelector('main') // DEFINO MI MAIN
 const dataBase = data['results'][0]['members'] // ACORTO LA RUTA DE MI DATA
 
 
 // DEFINO MI OBJETO CON LAS ESTADISTICAS QUE QUIERO GUARDAR
-let estadisticas = {
-    "cantidad_De_Republicanos": 0,
-    "votos_Totales_Democratas": 0,
-    "cantidad_De_Democratas": 0,
-    "votos_Totales_Republicanos": 0,
-    "cantidad_De_Independientes": 0,
-    "votosTotales_Independientes": 0,
-    "cantidad_Total": 0,
-    "votos_Totales": 0,
-}
-
 
 
 if (body.id === "bodyTablas") {
@@ -82,18 +71,18 @@ if (body.id === "bodyTablas") {
         let listEstados = []
         tablaCuerpo.innerHTML = '';
         data.length === 0 ? tablaCuerpo.innerHTML = `
-    <tr>
-        <td scope="row" colspan="5" class="fila1">
-             <h2 class="text-center bg-danger p-1">NOT FOUND</h2>
-        </td>
-     </tr>`:
+            <tr>
+                <td scope="row" colspan="5" class="fila1">
+                    <h2 class="text-center bg-danger p-1">NOT FOUND</h2>
+                </td>
+            </tr>`:
             data.forEach((member) => {
                 !listEstados.includes(member.state) ? listEstados.push(member.state) : ""
                 let filaNueva = document.createElement('tr');
 
                 filaNueva.innerHTML = `
             
-            <td scope="row" class="fila1"><a href="${member.url}" target="_blank">${member.last_name} ${member.middle_name ? member.middle_name : ""
+                <td scope="row" class="fila1"><a href="${member.url}" target="_blank">${member.last_name} ${member.middle_name ? member.middle_name : ""
                     } ${member.first_name} </a></td>
                 <td>${member.party}</td>
                 <td>${member.state}</td>
@@ -238,6 +227,16 @@ if (body.id === "bodyTablas") {
 
 if (body.id === "bodyAttendance") {
     let tbody = document.querySelector('#tbody'); // DEFINO MI TBODY
+    let estadisticas = {
+        "cantidad_De_Republicanos": 0,
+        "votos_Totales_Democratas": 0,
+        "cantidad_De_Democratas": 0,
+        "votos_Totales_Republicanos": 0,
+        "cantidad_De_Independientes": 0,
+        "votosTotales_Independientes": 0,
+        "cantidad_Total": 0,
+        "votos_Totales": 0,
+    }
 
     // -------------- PRIMER TABLA LOGICA --------------
 
@@ -245,7 +244,7 @@ if (body.id === "bodyAttendance") {
     dataBase.forEach(member => {
         estadisticas.cantidad_Total++;
         estadisticas.votos_Totales += member.votes_with_party_pct;
-
+       
         if (member.party === "R") {
             estadisticas.cantidad_De_Republicanos++;
             estadisticas.votos_Totales_Republicanos += member.votes_with_party_pct;
@@ -267,9 +266,7 @@ if (body.id === "bodyAttendance") {
     let porcentajeID = Math.round(estadisticas.votosTotales_Independientes / estadisticas.cantidad_De_Independientes);
     let porcentajeAll = Math.round(estadisticas.votos_Totales / estadisticas.cantidad_Total);
   
-    dibujarTabla(dataBase, "tbody_Glance");  // DIBUJO LA TABLA
-
-    
+    dibujarTabla(dataBase, "tbody_Glance");  // DIBUJO LA TABLA   
 
     // -------------- SEGUNDA Y TERCER TABLA LOGICA --------------
 
@@ -277,13 +274,12 @@ if (body.id === "bodyAttendance") {
     estadisticas.cantidad_Total = estadisticas.cantidad_Total
 
     let porcentajeTotal = estadisticas.cantidad_Total * 0.1
-    porcentajeTotal = Math.round(porcentajeTotal)
+    porcentajeTotal = Math.floor(porcentajeTotal)
     
     console.log('total: ' + estadisticas.cantidad_Total)
     console.log('10%: ' + porcentajeTotal)
-
-    
-    // -------------- FUNCIONES GENERALES  --------------
+ 
+    // -------------- FUNCION DIBUJAR  --------------
     function dibujarTabla(arrayMiembros, tbodyID) {
         tbody = document.querySelector(`#${tbodyID}`)  // DEFINO DE FORMA DINAMICA MI TBODY
         if (tbodyID == "tbody_Glance") {
@@ -295,14 +291,11 @@ if (body.id === "bodyAttendance") {
             <tr><td>Total</td> <td>${estadisticas.cantidad_Total}</td> <td>${porcentajeAll}%</td></tr>
             `
         }
-        
         else{
-
             let arrayCortadoAuxiliar = []  // CREO MI AUXILIAR   
             for (i = 0; i < porcentajeTotal; i++) {
                 arrayCortadoAuxiliar.push(arrayMiembros[i]) // LE PUSHEO EL 10% DE MIS MIEMBROS
-            }
-            
+            }       
 
             let vuelta = 0 // INICIO EN LA VUELTA 0
             while (arrayMiembros[porcentajeTotal-1 + vuelta].missed_votes_pct === arrayMiembros[porcentajeTotal + vuelta ].missed_votes_pct) { // COMPARO EL % DEL ULTIMO CON EL % DEL SIGUIENTE
@@ -316,23 +309,22 @@ if (body.id === "bodyAttendance") {
                 let datoAImprimir1 = Math.round(votosRecibidos)
                 let datoAImprimir2 = miembro.votes_with_party_pct
 
-                if(tbodyID == "tbody_Last_Engaged" || tbodyID == "tbody_Most_Engaged"){
-                    datoAImprimir1 = miembro.missed_votes
-                    datoAImprimir2 = miembro.missed_votes_pct
-                } 
-              
+                tbodyID == "tbody_Last_Engaged" || tbodyID == "tbody_Most_Engaged" ? datoAImprimir1 = miembro.missed_votes : ""
+                tbodyID == "tbody_Last_Engaged" || tbodyID == "tbody_Most_Engaged" ? datoAImprimir2 = miembro.missed_votes_pct : ""
+
                 let filaNueva = document.createElement('tr'); // CREO MI FILA
                 filaNueva.innerHTML = `
                              <th><a href="${miembro.url}" target="_blank">${miembro.last_name} ${miembro.middle_name ? miembro.middle_name : ""} ${miembro.first_name} </a></th>
                              <th>${datoAImprimir1}</th>
-                             <th>${datoAImprimir2}%</th>
-                                     `
+                             <th>${datoAImprimir2}%</th> `
                 tbody.appendChild(filaNueva)
             })
         }
-    }
-   
-    
+    } 
+
+    // -------------- LLAMADO DE LAS FUNCIONES --------------
+
+
     let listaMiembros = dataBase.filter(member => member.total_votes != 0) // SUPRIMO A LOS QUE NO TUVIERON VOTOS
 
     // ___________ ATTENDANCE ___________
@@ -358,5 +350,4 @@ if (body.id === "bodyAttendance") {
         listaMiembros = listaMiembros.sort((x, y) => y.votes_with_party_pct - x.votes_with_party_pct) // ORDENO MI ARRAY
         dibujarTabla(listaMiembros, 'tbody_Most_Loyalty')
     }
-    
 }
