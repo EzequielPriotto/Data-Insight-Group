@@ -32,19 +32,21 @@ const showMiembrosEstado2 = (data, estado) => {
 
 
 // ============== IMPRESION ==============
-let body = document.querySelector('body')
-let main = document.querySelector('main')
-const dataBase = data['results'][0]['members']
+let body = document.querySelector('body')  // DEFINO MI BODY
+let main = document.querySelector('main') // DEFINO MI MAIN
+const dataBase = data['results'][0]['members'] // ACORTO LA RUTA DE MI DATA
 
+
+// DEFINO MI OBJETO CON LAS ESTADISTICAS QUE QUIERO GUARDAR
 let estadisticas = {
-    "Number_Of_Democrats": 0,
-    "Total_Votes_Democrats": 0,
-    "Number_Of_Republicans": 0,
-    "Total_Votes_Republicans": 0,
-    "Number_Of_Independent": 0,
-    "Total_Votes_Independent": 0,
-    "Number_Total": 0,
-    "Total_Votes": 0,
+    "cantidad_De_Republicanos": 0,
+    "votos_Totales_Democratas": 0,
+    "cantidad_De_Democratas": 0,
+    "votos_Totales_Republicanos": 0,
+    "cantidad_De_Independientes": 0,
+    "votosTotales_Independientes": 0,
+    "cantidad_Total": 0,
+    "votos_Totales": 0,
 }
 
 
@@ -65,7 +67,7 @@ if (body.id === "bodyTablas") {
     tabla.addEventListener("click", event => {
 
         let target = event.target.querySelector('input');
-        if(target != null){
+        if (target != null) {
             target.addEventListener('change', () => {
                 isChecked = target.checked
                 check = target
@@ -235,165 +237,126 @@ if (body.id === "bodyTablas") {
 }
 
 if (body.id === "bodyAttendance") {
-    let tbody = document.querySelector('#tbody')
+    let tbody = document.querySelector('#tbody'); // DEFINO MI TBODY
 
     // -------------- PRIMER TABLA LOGICA --------------
+
     // CALCULO EL TOTAL E INDIVIDUALMENTE CADA PARTIDO
-    
     dataBase.forEach(member => {
-        estadisticas.Number_Total++;
-        estadisticas.Total_Votes += member.votes_with_party_pct;
+        estadisticas.cantidad_Total++;
+        estadisticas.votos_Totales += member.votes_with_party_pct;
+
         if (member.party === "R") {
-            estadisticas.Number_Of_Republicans++;
-            estadisticas.Total_Votes_Republicans += member.votes_with_party_pct;
+            estadisticas.cantidad_De_Republicanos++;
+            estadisticas.votos_Totales_Republicanos += member.votes_with_party_pct;
         }
         else if (member.party === "D") {
-            estadisticas.Number_Of_Democrats++;
-            estadisticas.Total_Votes_Democrats += member.votes_with_party_pct;
+            estadisticas.cantidad_De_Democratas++;
+            estadisticas.votos_Totales_Democratas += member.votes_with_party_pct;
         }
         else if (member.party === "ID") {
-            estadisticas.Number_Of_Independent++;
-            estadisticas.Total_Votes_Independent += member.votes_with_party_pct;
+            estadisticas.cantidad_De_Independientes++;
+            estadisticas.votosTotales_Independientes += member.votes_with_party_pct;
         }
 
     })
-    let porcentajeR = Math.round(calcularPorcentajePartidos('R'))  //SACO % DE LOS REPUBLICANOS
-    let porcentajeD = Math.round(calcularPorcentajePartidos('D'))  //SACO % DE LOS DEMOCRATAS
-    let porcentajeID = Math.round(calcularPorcentajePartidos('ID'))  //SACO % DE LOS INDEPENDIENTES    
-    let porcentajeAll = Math.round(calcularPorcentajePartidos('ALL')) // HAGO UN PROMEDIO DE LOS 3 %
-    dibujarTabla(dataBase, "tbody_Glance")  // DIBUJO LA TABLA
 
+    // CONSIGO TODOS LOS %
+    let porcentajeD  = Math.round(estadisticas.votos_Totales_Democratas / estadisticas.cantidad_De_Democratas) ;
+    let porcentajeR = Math.round(estadisticas.votos_Totales_Republicanos / estadisticas.cantidad_De_Republicanos);
+    let porcentajeID = Math.round(estadisticas.votosTotales_Independientes / estadisticas.cantidad_De_Independientes);
+    let porcentajeAll = Math.round(estadisticas.votos_Totales / estadisticas.cantidad_Total);
+  
+    dibujarTabla(dataBase, "tbody_Glance");  // DIBUJO LA TABLA
 
-
+    
 
     // -------------- SEGUNDA Y TERCER TABLA LOGICA --------------
 
     // CALCULO DEL TOP
-    console.log('total: ' + estadisticas.Number_Total)
-    let porcentajeTotal = estadisticas.Number_Total * 0.1
+    estadisticas.cantidad_Total = estadisticas.cantidad_Total
+
+    let porcentajeTotal = estadisticas.cantidad_Total * 0.1
+    porcentajeTotal = Math.round(porcentajeTotal)
+    
+    console.log('total: ' + estadisticas.cantidad_Total)
     console.log('10%: ' + porcentajeTotal)
 
-
-    // ___________ ATTENDANCE ___________
     
-    let tipoTop = ""
-    let topData = dataBase.filter(member => member.total_votes != 0)
-    if(main.id === "mainAttendance"){
-        console.log("hola")
-        
-        // ORDERNAR EL TOP LEAST
-        tipoTop = "Least_Missed"
-        topData = topData.sort(ordernarTOP)
-        dibujarTabla(topData, 'tbody_Last_Engaged')
-
-        // ORDERNAR EL TOP MOST
-        tipoTop = "Most_Missed"
-        topData = topData.sort(ordernarTOP)
-        dibujarTabla(topData, 'tbody_Most_Engaged')
-
-    }
-
-
-    // ___________ LOYALTY ___________
-
-   else if(main.id === "mainLoyalty"){
-     // ORDERNAR EL TOP LEAST
-     console.log("chau")
-
-     tipoTop = "Least_Voted"
-     topData = topData.sort(ordernarTOP)
-     dibujarTabla(topData, 'tbody_Last_Loyalty')
- 
-     // ORDERNAR EL TOP MOST
-     tipoTop = "Most_Voted"
-     topData = topData.sort(ordernarTOP)
-     dibujarTabla(topData, 'tbody_Most_Loyalty')
-    }
-
-
-
     // -------------- FUNCIONES GENERALES  --------------
     function dibujarTabla(arrayMiembros, tbodyID) {
-        tbody = document.querySelector(`#${tbodyID}`)
-        console.log(tbody)
+        tbody = document.querySelector(`#${tbodyID}`)  // DEFINO DE FORMA DINAMICA MI TBODY
         if (tbodyID == "tbody_Glance") {
-            estadisticas.Number_Of_Independent === 0 ? porcentajeID = `-` : porcentajeID = `${porcentajeID}%`
-
+            estadisticas.cantidad_De_Independientes=== 0 ? porcentajeID = `-` : porcentajeID = `${porcentajeID}%` // EVITO EL NaN
             tbody.innerHTML = `
-            <tr><td>Democrats</td> <td>${estadisticas.Number_Of_Democrats}</td> <td>${porcentajeD}%</td></tr>
-            <tr><td>Republicans</td> <td>${estadisticas.Number_Of_Republicans}</td> <td>${porcentajeR}%</td></tr>
-            <tr><td>Independents</td> <td>${estadisticas.Number_Of_Independent}</td> <td>${porcentajeID}</td></tr>
-            <tr><td>Total</td> <td>${estadisticas.Number_Total}</td> <td>${porcentajeAll}%</td></tr>
-             `
+            <tr><td>Democrats</td> <td>${estadisticas.cantidad_De_Democratas}</td> <td>${porcentajeD}%</td></tr>
+            <tr><td>Republicans</td> <td>${estadisticas.cantidad_De_Republicanos}</td> <td>${porcentajeR}%</td></tr>
+            <tr><td>Independents</td> <td>${estadisticas.cantidad_De_Independientes}</td> <td>${porcentajeID}</td></tr>
+            <tr><td>Total</td> <td>${estadisticas.cantidad_Total}</td> <td>${porcentajeAll}%</td></tr>
+            `
         }
-   
-        else if (tbodyID == "tbody_Last_Engaged" || tbodyID == "tbody_Most_Engaged") {
-            
-            porcentajeTotal = Math.round(porcentajeTotal)
-            while (arrayMiembros[porcentajeTotal].missed_votes_pct == arrayMiembros[porcentajeTotal+1].missed_votes_pct) {
-                
-                porcentajeTotal ++
-            }
-            
-            for (i = 0; i <= porcentajeTotal; i++) {
-                let filaNueva = document.createElement('tr');
-                filaNueva.innerHTML = `
-                             <th><a href="${arrayMiembros[i].url}">${arrayMiembros[i].first_name}
-                                ${arrayMiembros[i].last_name}
-                                </a></th>
-                             <th>${arrayMiembros[i].missed_votes}</th>
-                             <th>${arrayMiembros[i].missed_votes_pct}%</th>
-                                     `
-                tbody.appendChild(filaNueva)
-            }
+        
+        else{
 
-        }
-
-        else if (tbodyID == "tbody_Last_Loyalty" || tbodyID == "tbody_Most_Loyalty") {
-            porcentajeTotal = Math.round(porcentajeTotal)
-            while (arrayMiembros[porcentajeTotal].votes_with_party_pct == arrayMiembros[porcentajeTotal+1].votes_with_party_pct) {
-                
-                porcentajeTotal ++
-            }
+            let arrayCortadoAuxiliar = []  // CREO MI AUXILIAR   
             for (i = 0; i < porcentajeTotal; i++) {
-                console.log(arrayMiembros[i].first_name + " " + arrayMiembros[i].votes_with_party_pct)
-                let filaNueva = document.createElement('tr');
-                let votosRecibidos =  (arrayMiembros[i].total_votes / 100) * arrayMiembros[i].votes_with_party_pct
+                arrayCortadoAuxiliar.push(arrayMiembros[i]) // LE PUSHEO EL 10% DE MIS MIEMBROS
+            }
+            
+
+            let vuelta = 0 // INICIO EN LA VUELTA 0
+            while (arrayMiembros[porcentajeTotal-1 + vuelta].missed_votes_pct === arrayMiembros[porcentajeTotal + vuelta ].missed_votes_pct) { // COMPARO EL % DEL ULTIMO CON EL % DEL SIGUIENTE
+                arrayCortadoAuxiliar.push(arrayMiembros[porcentajeTotal + vuelta]) // PUSHEO A MI ARRAY EL SIGUIENTE AL ULTIMO
+                vuelta++
+            }
+              
+            arrayCortadoAuxiliar.forEach(miembro =>{
+                let votosRecibidos = (miembro.total_votes / 100) * miembro.votes_with_party_pct
+
+                let datoAImprimir1 = Math.round(votosRecibidos)
+                let datoAImprimir2 = miembro.votes_with_party_pct
+
+                if(tbodyID == "tbody_Last_Engaged" || tbodyID == "tbody_Most_Engaged"){
+                    datoAImprimir1 = miembro.missed_votes
+                    datoAImprimir2 = miembro.missed_votes_pct
+                } 
+              
+                let filaNueva = document.createElement('tr'); // CREO MI FILA
                 filaNueva.innerHTML = `
-                             <th><a href="${arrayMiembros[i].url}">${arrayMiembros[i].first_name}
-                                ${arrayMiembros[i].last_name}
-                                </a></th>
-                             <th>${Math.round(votosRecibidos)}</th>
-                             <th>${arrayMiembros[i].votes_with_party_pct}%</th>
+                             <th><a href="${miembro.url}" target="_blank">${miembro.last_name} ${miembro.middle_name ? miembro.middle_name : ""} ${miembro.first_name} </a></th>
+                             <th>${datoAImprimir1}</th>
+                             <th>${datoAImprimir2}%</th>
                                      `
                 tbody.appendChild(filaNueva)
-            }
+            })
         }
     }
+   
+    
+    let listaMiembros = dataBase.filter(member => member.total_votes != 0) // SUPRIMO A LOS QUE NO TUVIERON VOTOS
 
-    function calcularPorcentajePartidos(partido) {
-        let resultado
-        return partido === "R" ? resultado = estadisticas.Total_Votes_Republicans / estadisticas.Number_Of_Republicans :
-            partido === "D" ? resultado = estadisticas.Total_Votes_Democrats / estadisticas.Number_Of_Democrats :
-                partido === "ID" ? resultado = estadisticas.Total_Votes_Independent / estadisticas.Number_Of_Independent :
-                    partido === "ALL" ? resultado = estadisticas.Total_Votes / estadisticas.Number_Total : ""
+    // ___________ ATTENDANCE ___________
+
+    if (main.id === "mainAttendance") {
+        // ORDERNAR EL TOP LEAST
+        listaMiembros = listaMiembros.sort((x, y) => y.missed_votes_pct - x.missed_votes_pct) // ORDENO MI ARRAY
+        dibujarTabla(listaMiembros, 'tbody_Last_Engaged')
+        
+        // ORDERNAR EL TOP MOST
+        listaMiembros = listaMiembros.sort((x, y) => x.missed_votes_pct - y.missed_votes_pct) // ORDENO MI ARRAY
+        dibujarTabla(listaMiembros, 'tbody_Most_Engaged')
     }
-
-    function ordernarTOP(x, y) {
-        if (tipoTop === "Least_Missed") {
-            return y.missed_votes_pct - x.missed_votes_pct
-        }
-        if (tipoTop === "Most_Missed") {
-            return x.missed_votes_pct - y.missed_votes_pct
-        }
-        if (tipoTop === "Least_Voted") {
-            return x.votes_with_party_pct - y.votes_with_party_pct
-        }
-        if (tipoTop === "Most_Voted") {
-            return y.votes_with_party_pct - x.votes_with_party_pct
-        }
+    
+    // ___________ LOYALTY ___________
+    
+    else if (main.id === "mainLoyalty") {
+        // ORDERNAR EL TOP LEAST
+        listaMiembros = listaMiembros.sort((x, y) => x.votes_with_party_pct - y.votes_with_party_pct) // ORDENO MI ARRAY
+        dibujarTabla(listaMiembros, 'tbody_Last_Loyalty')
+        
+        // ORDERNAR EL TOP MOST
+        listaMiembros = listaMiembros.sort((x, y) => y.votes_with_party_pct - x.votes_with_party_pct) // ORDENO MI ARRAY
+        dibujarTabla(listaMiembros, 'tbody_Most_Loyalty')
     }
-
-
-
+    
 }
