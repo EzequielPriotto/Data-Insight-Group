@@ -24,17 +24,15 @@ fetch(URLAPI, init)
         dataBaseDinamica = data.results[0].members
 
         html.style.overflowY = "auto"
-        html.style.backgroundColor = "rgba(0, 0, 0, 0)"
         loader.classList.remove('loaderActivado')
         loader.classList.add('loaderDesactivado')
         
         mainFunction(dataBaseDinamica)
     })
 
-// ============== IMPRESION ==============
+// ============== FUNCION MAIN ==============
 
 function mainFunction(dataBase) {
-    
     const showAlphaState = data => {
         let tablaStates = [];
         data.forEach(member => { if (!tablaStates.includes(member.state)) { tablaStates.push(member.state) } });
@@ -361,5 +359,4 @@ function mainFunction(dataBase) {
             dibujarTabla(listaMiembros, 'tbody_Most_Loyalty')
         }
     }
-
 }

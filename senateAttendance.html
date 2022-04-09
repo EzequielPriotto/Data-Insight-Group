@@ -15,7 +15,8 @@
     <div class="spinnerContainer">
         <div id="spinner">
             <svg class="circular" viewBox="25 25 50 50">
-              <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"></circle>
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10">
+                </circle>
             </svg>
         </div>
     </div>
@@ -46,8 +47,8 @@
                             <span>Home</span></a>
                     </li>
                     <li class="nav-item dropdown ">
-                        <a class="nav-link  navToggle  d-flex" href="#" id="navbarDropdownMenuLink"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link  navToggle  d-flex" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="ms-xl-3 ">Congress 113</span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -56,30 +57,26 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown ">
-                        <a class="nav-link  navToggle  d-flex" href="#" id="navbarDropdownMenuLink1"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link  navToggle  d-flex" href="#" id="navbarDropdownMenuLink1" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="ms-xl-3">Attendance</span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                            <li><a class="dropdown-item  " href="./houseAttendance.html">House</a></li>
+                            <li><a class="dropdown-item " href="./houseAttendance.html">House</a></li>
                             <li><a class="dropdown-item select" href="#">Senate</a></li>
                         </ul>
                     </li>
-                   
+
                     <li class="nav-item dropdown ">
-                        <a class="nav-link  navToggle  d-flex" href="#" id="navbarDropdownMenuLink2"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link  navToggle  d-flex" href="#" id="navbarDropdownMenuLink2" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="ms-xl-3">Party Loyalty</span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                            <li><a class="dropdown-item  href="./houseLoyalty.html">House</a></li>
+                            <li><a class="dropdown-item" href="./houseLoyalty.html">House</a></li>
                             <li><a class="dropdown-item " href="./senateLoyalty.html">Senate</a></li>
                         </ul>
-                    </li>
-                   
-                 
-                   
-    
+
                 </ul>
             </div>
         </div>
@@ -87,7 +84,7 @@
 
     <main class="mx-2 " id="mainAttendance">
         <section class="row border-bottom border-2 border-dark pb-5">
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
                 <h2>Attendance</h2>
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt officia suscipit quas iusto aperiam
                     vel veritatis a odit saepe atque! Nam deleniti ipsa quidem. Atque dolorem eius necessitatibus
@@ -98,7 +95,7 @@
                     ullam necessitatibus beatae, omnis voluptates hic neque optio asperiores?</p>
 
             </div>
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
                 <h3>Senate at a glance</h3>
                 <table class="table table-hover mt-4 " id="tablaHouseGlance">
                     <thead id="cabecera_House_Glance">
@@ -109,11 +106,19 @@
                         </tr>
                     </thead>
                     <tbody id="tbody_Glance">
-                        <tr><td>Democrats</td></tr>
-                        <tr><td>Republicans</td></tr>
-                        <tr><td>Independents</td></tr>
-                        <tr><td>Total</td></tr>
-                      
+                        <tr>
+                            <td>Democrats</td>
+                        </tr>
+                        <tr>
+                            <td>Republicans</td>
+                        </tr>
+                        <tr>
+                            <td>Independents</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -121,7 +126,7 @@
         </section>
 
         <section class="row pt-5">
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
                 <h3>Least Engaged (Bottom 10% Attendance)</h3>
                 <table class="table table-hover mt-4" id="tablaLastEngaged">
                     <thead id="cabecera_Last_Engaged">
@@ -136,7 +141,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
                 <h3>Most Engaged (Top 10% Attendance)</h3>
                 <table class="table table-hover mt-4" id="tablaMostEngaged">
                     <thead id="cabecera_Most_Engaged">
@@ -158,7 +163,7 @@
 
     <footer class=" d-flex justify-content-center mt-5">
         <div>
-            <p >2021 Data Insight Group</p>
+            <p>2021 Data Insight Group</p>
             <p>All Rights Reserved</p>
         </div>
     </footer>

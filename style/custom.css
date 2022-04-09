@@ -93,7 +93,7 @@ label{
     width: 100px;
    }
    
-#spinner:before {
+#spinner::before {
     content: "";
     display: block;
     padding-top: 100%;
