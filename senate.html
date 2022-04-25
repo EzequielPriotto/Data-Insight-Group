@@ -6,162 +6,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style/custom.css">
+    <link rel="stylesheet" href="../style/custom.css">
 </head>
 <body id="bodyTablas">
-  <div class="spinnerContainer">
-    <div id="spinner">
-        <svg class="circular" viewBox="25 25 50 50">
-          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"></circle>
-        </svg>
-    </div>
-</div>
-  
     
-  <nav class="navbar navbar-expand-xl navbar-light bg-light ">
-    <div class="container-fluid d-flex ">
-        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo2"
-            aria-controls="navbarTogglerDemo2" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-xl-flex flex-xl-column  show " id="navbarTogglerDemo2">
-            <div class="parteArriba d-flex flex-column flex-lg-row justify-content-between mb-4 w-100 ">
-                <div class="d-flex  align-items-center">
-                    <span class=" d-flex justify-content-start justify-content-lg-center "><img class="img-nav"
-                            src="./assets/logoLupa.png" alt="logo"></span>
-                    <h1>Data Insíght Group Logo</h1>
-                </div>
-                <div class="d-flex  align-items-center">
-                    <a href="mailto:info@datainsightgroup.net" class="ms-2 ms-lg-0 p-1 me-5"><img
-                            src="./assets/iconCorreo.png" alt="send_mail"
-                            class=" me-1">info@datainsightgroup.net</a>
-                </div>
-            </div>
-            <ul class="navbar-nav me-auto mb-2  mb-xl-0 w-100 ">
-                <li class="nav-item">
-                    <a class="nav-link  ms-xl-3 d-flex nav-Home" aria-current="page" href="./index.html">
-                        <span>Home</span></a>
-                </li>
-                <li class="nav-item dropdown ">
-                    <a class="nav-link  navToggle  d-flex" href="#" id="navbarDropdownMenuLink"
-                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="ms-xl-3 ">Congress 113</span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item " href="./house.html">House</a></li>
-                        <li><a class="dropdown-item select" href="#">Senate</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown ">
-                    <a class="nav-link  navToggle  d-flex" href="#" id="navbarDropdownMenuLink1"
-                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="ms-xl-3">Attendance</span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                        <li><a class="dropdown-item  " href="./houseAttendance.html">House</a></li>
-                        <li><a class="dropdown-item " href="./senateAttendance.html">Senate</a></li>
-                    </ul>
-                </li>
-               
-                <li class="nav-item dropdown ">
-                    <a class="nav-link  navToggle  d-flex" href="#" id="navbarDropdownMenuLink2"
-                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="ms-xl-3">Party Loyalty</span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                        <li><a class="dropdown-item " href="./houseLoyalty.html">House</a></li>
-                        <li><a class="dropdown-item " href="./senateLoyalty.html">Senate</a></li>
-                    </ul>
-                </li>
-               
-             
-               
-
-            </ul>
+    <div class="spinnerContainer">
+        <div id="spinner">
+            <svg class="circular" viewBox="25 25 50 50">
+              <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"></circle>
+            </svg>
         </div>
     </div>
-</nav>
+    <div id="app">
+  
+        <nav class="navbar navbar-expand-xl navbar-light bg-light ">
+            <div class="container-fluid d-flex ">
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo2" aria-controls="navbarTogglerDemo2" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-xl-flex flex-xl-column  show " id="navbarTogglerDemo2">
+                    <div class="parteArriba d-flex flex-column flex-lg-row justify-content-between w-100 ">
+                        <div class="d-flex  align-items-center">
+                            <span class=" d-flex justify-content-start justify-content-lg-center" id="spanLogo"><img
+                                    class="img-nav" src="../assets/Seal_of_the_United_States_Congress.svg"
+                                    alt="logo"></span>
+                            <h1>Data Insíght Group Logo</h1>
+                        </div>
+                        <div class="d-flex  align-items-center">
+                            <a href="mailto:info@datainsightgroup.net" class="ms-2 ms-lg-0 p-1 me-5 mail-nav"><i
+                                    class="fa-solid fa-envelope"></i>info@datainsightgroup.net</a>
+                        </div>
+                    </div>
+                    <ul class="navbar-nav me-auto mb-2  mb-xl-0 w-100 ">
+                        <li class="nav-item">
+                            <a class="nav-link  ms-xl-3 d-flex nav-Home" aria-current="page" href="./index.html">
+                                <span class="homeLink">Home</span></a>
+                        </li>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link  navToggle  d-flex" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="ms-xl-3 ">Congress 113</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item  " href="./house.html">House</a></li>
+                                <li><a class="dropdown-item select" href="#">Senate</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link  navToggle  d-flex" href="#" id="navbarDropdownMenuLink1" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="ms-xl-3">Attendance</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                                <li><a class="dropdown-item  " href="./houseAttendance.html">House</a></li>
+                                <li><a class="dropdown-item " href="./senateAttendance.html">Senate</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link  navToggle  d-flex" href="#" id="navbarDropdownMenuLink2" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="ms-xl-3">Party Loyalty</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                <li><a class="dropdown-item " href="./houseLoyalty.html">House</a></li>
+                                <li><a class="dropdown-item " href="./senateLoyalty.html">Senate</a></li>
+                            </ul>
+                        </li>
 
 
-    <main class="mx-2">
-      <div>
-        <h2>Senate</h2>
-        <p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
-        
-        </div>
-        <form class="row row-cols-lg-auto g-3 align-items-center ">
-         
-            <div class="col-12">
-        
-              <select class="form-select" name="estados" id="statesSelect"></select>
+
+
+                    </ul>
+                </div>
             </div>
-          
-            <div class="col-12 d-flex gap-4">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="Replicans" value="R">
-                <label class="form-check-label" for="Replicans">
-                  Republicans
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="Democrats" value="D">
-                <label class="form-check-label" for="Democrats">
-                  Democrats
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="Independent" value="ID">
-                <label class="form-check-label" for="Independent">
-                  Independent
-                </label>
-              </div>
+        </nav>
+  
+        <main class="mx-2">
+            <div>
+                <h2>Senate</h2>
+                <p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
+                
+                </div>
+            <form class="row row-cols-lg-auto g-3 align-items-center">
+  
+                <div class="col-12">
+                    <select class="form-select" name="estados" id="statesSelect" v-model="condicionesFiltro.state">
+                        <option class="allSelect">All</option>
+                        <option v-for="state in listadoEstados">{{state}}</option>
+                    </select>
+                    <!-- <p> ESTADO SELECCIONADO: {{condicionesFiltro.state}}</p>
+                    <p> PARTIDO SELECCIONADO:{{condicionesFiltro.partys}}</p> -->
+                </div>
+  
+                <div class="col-12 d-flex gap-4">
+                    <div class="form-check">
+                        <input class="form-check-input" v-model="condicionesFiltro.partys" type="checkbox"
+                            id="Replicans" value="R">
+                        <label class="form-check-label" for="Replicans">
+                            Republicans
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" v-model="condicionesFiltro.partys" type="checkbox"
+                            id="Democrats" value="D">
+                        <label class="form-check-label" for="Democrats">
+                            Democrats
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" v-model="condicionesFiltro.partys" type="checkbox"
+                            id="Independent" value="ID">
+                        <label class="form-check-label" for="Independent">
+                            Independent
+                        </label>
+                    </div>
+                    
+                </div>
+  
+            </form>
+  
+            <table class="table table-hover mt-4" id="tablaCuerpo">
+                <thead id="cabecera">
+                    <tr>
+                        <th scope="col" class="fila1" id="names">
+                            <label for="name">Full Name<input class="checksTable " type="checkbox" name="checkBoxPrueba"
+                                    id="name" @click="escucharClick"> <i class=" ms-1 fa-solid fa-arrow-up-a-z opcion1" @click="escucharClick"></i></label>
+                        </th>
+                        <th scope="col" id="partys">
+                            <label for="party">Party<input class="checksTable " type="checkbox" name="checkBoxPrueba"
+                                    id="party" @click="escucharClick"><i class=" ms-1 fa-solid fa-arrow-up-a-z opcion2" @click="escucharClick"></i></label>
+                        </th>
+                        <th scope="col" id="states">
+                            <label for="state">State<input class="checksTable " type="checkbox" name="checkBoxPrueba"
+                                    id="state" @click="escucharClick"> <i class=" ms-1 fa-solid fa-arrow-up-a-z opcion3"></i></label>
+  
+                        </th>
+                        <th scope="col" id="senioritys">
+                            <label for="seniority">Years In Office<input class="checksTable " type="checkbox"
+                                    name="checkBoxPrueba" id="seniority" @click="escucharClick"> <i
+                                    class=" ms-1 fa-solid fa-arrow-up-9-1 opcion4"></i></label>
+  
+                        </th>
+                        <th scope="col" id="votess">
+                            <label for="votes">% votes w/ Party<input class="checksTable " type="checkbox"
+                                    name="checkBoxPrueba" id="votes" @click="escucharClick"> <i
+                                    class=" ms-1 fa-solid fa-arrow-up-9-1 opcion5"></i></label>
+  
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <tr v-for="member in listaFiltrada2">
+                        <td scope="row" class="fila1"><a v-bind:href=member.url target="_blank">{{member.last_name}}
+                                {{member.middle_name ? member.middle_name : ""
+                                }}{{member.first_name}} </a></td>
+                        <td>{{member.party}}</td>
+                        <td>{{member.state}}</td>
+                        <td>{{member.seniority}} years</td>
+                        <td>{{member.votes_with_party_pct}}%</td>
+  
+  
+                    </tr>
+  
+                </tbody>
+            </table>
+        </main>
+  
+  
+        <footer class=" d-flex justify-content-center mt-5">
+            <div>
+                <p>2021 Data Insight Group</p>
+                <p>All Rights Reserved</p>
             </div>
-         
-          </form>
-
-        <table class="table table-hover mt-4" id="tablaCuerpo">
-            <thead id="cabecera">
-              <tr>
-                <th scope="col" class="fila1" id="names">
-                  <label for="name">Full Name<input class="checksTable me-5" type="checkbox" name="checkBoxPrueba" id="name"> <i class="fa-solid fa-arrow-up-a-z opcion1"></i></label>
-                </th>
-                <th scope="col" id="partys">
-                  <label for="party">Party<input class="checksTable" type="checkbox" name="checkBoxPrueba" id="party"><i class="fa-solid fa-arrow-up-a-z opcion2"></i></label>
-                </th>
-                <th scope="col" id="states">
-                  <label for="state">State<input class="checksTable" type="checkbox" name="checkBoxPrueba" id="state"> <i class="fa-solid fa-arrow-up-a-z opcion3"></i></label>
-                  
-                </th>
-                <th scope="col" id="senioritys">
-                  <label for="seniority">Years In Office<input class="checksTable" type="checkbox" name="checkBoxPrueba" id="seniority"> <i class="fa-solid fa-arrow-up-9-1 opcion4"></i></label>
-                  
-                </th>
-                <th scope="col" id="votess">
-                  <label for="votes">% votes w/ Party<input class="checksTable" type="checkbox" name="checkBoxPrueba" id="votes"> <i class="fa-solid fa-arrow-up-9-1 opcion5"></i></label>
-
-                </th>
-              </tr>
-            </thead>
-            <tbody id="table-body">
-
-            </tbody>
-          </table>
-
-          
-       
-    </main>
-
-    <footer class=" d-flex justify-content-center mt-5">
-      <div>
-          <p >2021 Data Insight Group</p>
-          <p>All Rights Reserved</p>
-      </div>
-  </footer>
-
+        </footer>
+  
+        <!-- LLAMADO A FUNCIONES -->
+        {{actualizarChecksPartidos}}
+        {{filtroDinamico}}
+    </div>
+  
     <script src="https://kit.fontawesome.com/19b971d5e3.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="./data/senate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3"></script>
     <script src="./script/main.js"></script>
 
-</body>
+  
+  </body>
 </html>
